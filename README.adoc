@@ -1,4 +1,4 @@
-# Mokapi
+# MokApi
 
 This project is fake REST API for testing and prototyping.
 
