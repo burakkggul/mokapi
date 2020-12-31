@@ -1,0 +1,22 @@
+# Mokapi
+
+This project is fake REST API for testing and prototyping.
+
+
+#### Prerequisite
+
+1. JDK 11
+2. Mongo DB 4.4
+
+## Installation
+Soon...
+
+## Usage
+Soon...
+
+## Contributing
+Soon...
+
+
+## License
+https://github.com/burakkggul/mokapi/blob/master/LICENSE[GNUv3]
