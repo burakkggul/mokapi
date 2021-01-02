@@ -6,7 +6,7 @@ This project is fake REST API for testing and prototyping.
 #### Prerequisite
 
 1. JDK 11
-2. Mongo DB 4.4
+2. Mongo DB 4.4.2
 
 ## Installation
 Soon...
