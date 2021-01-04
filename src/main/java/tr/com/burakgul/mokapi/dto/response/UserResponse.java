@@ -7,6 +7,7 @@ import tr.com.burakgul.mokapi.model.User;
 @Getter
 @Setter
 public class UserResponse {
+    private String id;
     private String name;
     private String username;
     private String email;
@@ -15,20 +16,21 @@ public class UserResponse {
     private String website;
     private CompanyResponse company;
 
-    public UserResponse(User user){
+    public void setUser(User user) {
+        this.id = user.getId();
         this.name = user.getName();
         this.username = user.getUsername();
         this.email = user.getEmail();
-        if(user.getAddress() != null){
+        if (user.getAddress() != null) {
             this.address = new AddressResponse(user.getAddress());
-        }else {
+        } else {
             this.address = null;
         }
         this.phone = user.getPhone();
         this.website = user.getWebsite();
-        if(user.getCompany() != null){
+        if (user.getCompany() != null) {
             this.company = new CompanyResponse(user.getCompany());
-        }else {
+        } else {
             this.company = null;
         }
     }

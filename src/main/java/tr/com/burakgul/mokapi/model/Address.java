@@ -3,6 +3,7 @@ package tr.com.burakgul.mokapi.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import tr.com.burakgul.mokapi.dto.request.AddressRequest;
 
 @Getter
 @Setter
@@ -15,12 +16,12 @@ public class Address {
     private String latitude;
     private String longitude;
 
-    public Address(String street, String suite, String city, String zipcode, String latitude, String longitude){
-        this.street = street;
-        this.suite = suite;
-        this.city = city;
-        this.zipcode = zipcode;
-        this.latitude = latitude;
-        this.longitude = longitude;
+    public Address(AddressRequest addressRequest) {
+        this.street = addressRequest.getStreet();
+        this.suite = addressRequest.getSuite();
+        this.city = addressRequest.getCity();
+        this.zipcode = addressRequest.getZipcode();
+        this.latitude = addressRequest.getLatitude();
+        this.longitude = addressRequest.getLongitude();
     }
 }

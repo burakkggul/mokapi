@@ -27,7 +27,7 @@ public class PhotoController {
 
     @GetMapping
     public ResponseEntity getPhotos() {
-        return photoService.getPhotos();
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
@@ -37,7 +37,7 @@ public class PhotoController {
 
     @PostMapping
     public ResponseEntity addPhotos(@RequestBody List<PhotoRequest> photoRequests) {
-        return photoService.savePhotos(photoRequests);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")
