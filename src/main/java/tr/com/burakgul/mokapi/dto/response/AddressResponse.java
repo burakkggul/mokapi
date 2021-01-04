@@ -1,11 +1,13 @@
 package tr.com.burakgul.mokapi.dto.response;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import tr.com.burakgul.mokapi.model.Address;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class AddressResponse {
 
     private String street;
