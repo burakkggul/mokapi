@@ -10,20 +10,22 @@ import tr.com.burakgul.mokapi.dto.request.AddressRequest;
 @NoArgsConstructor
 public class Address {
     private String addressName;
-    private String street;
-    private String suite;
+    private String addressLine;
+    private String country;
     private String city;
     private String zipcode;
     private String latitude;
     private String longitude;
+    private Boolean active;
 
     public void setAddressRequest(AddressRequest addressRequest) {
         this.addressName = addressRequest.getAddressName();
-        this.street = addressRequest.getStreet();
-        this.suite = addressRequest.getSuite();
+        this.addressLine = addressRequest.getAddressLine();
+        this.country = addressRequest.getCountry();
         this.city = addressRequest.getCity();
         this.zipcode = addressRequest.getZipcode();
         this.latitude = addressRequest.getLatitude();
         this.longitude = addressRequest.getLongitude();
+        this.active = addressRequest.getActive();
     }
 }
