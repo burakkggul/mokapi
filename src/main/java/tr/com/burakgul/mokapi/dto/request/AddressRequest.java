@@ -5,6 +5,7 @@ import lombok.Setter;
 
 @Getter @Setter
 public class AddressRequest {
+    private String addressName;
     private String street;
     private String suite;
     private String city;

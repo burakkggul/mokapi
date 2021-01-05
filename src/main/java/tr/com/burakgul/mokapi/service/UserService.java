@@ -3,6 +3,7 @@ package tr.com.burakgul.mokapi.service;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
 import org.slf4j.Logger;
@@ -197,7 +198,7 @@ public class UserService {
             UserResponse patchedUserResponse = new UserResponse();
             patchedUserResponse.setUser(patchedUser);
             return new InfoResponse(HttpStatus.OK, "Patching was successful.", patchedUserResponse);
-        }catch (JsonPatchException | JsonParseException e){
+        }catch (JsonPatchException | JsonParseException | UnrecognizedPropertyException e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());

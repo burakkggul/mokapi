@@ -9,6 +9,7 @@ import tr.com.burakgul.mokapi.dto.request.AddressRequest;
 @Setter
 @NoArgsConstructor
 public class Address {
+    private String addressName;
     private String street;
     private String suite;
     private String city;
@@ -16,7 +17,8 @@ public class Address {
     private String latitude;
     private String longitude;
 
-    public Address(AddressRequest addressRequest) {
+    public void setAddressRequest(AddressRequest addressRequest) {
+        this.addressName = addressRequest.getAddressName();
         this.street = addressRequest.getStreet();
         this.suite = addressRequest.getSuite();
         this.city = addressRequest.getCity();

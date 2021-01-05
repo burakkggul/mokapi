@@ -13,7 +13,7 @@ public class Company {
     private String catchPhrase;
     private String bs;
 
-    public Company(CompanyRequest companyRequest) {
+    public void setCompanyRequest(CompanyRequest companyRequest) {
         this.name = companyRequest.getName();
         this.catchPhrase = companyRequest.getCatchPhrase();
         this.bs = companyRequest.getBs();

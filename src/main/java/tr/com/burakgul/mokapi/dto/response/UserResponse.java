@@ -2,7 +2,11 @@ package tr.com.burakgul.mokapi.dto.response;
 
 import lombok.Getter;
 import lombok.Setter;
+import tr.com.burakgul.mokapi.model.Address;
 import tr.com.burakgul.mokapi.model.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -11,7 +15,7 @@ public class UserResponse {
     private String name;
     private String username;
     private String email;
-    private AddressResponse address;
+    private List<AddressResponse> addresses;
     private String phone;
     private String website;
     private CompanyResponse company;
@@ -21,10 +25,16 @@ public class UserResponse {
         this.name = user.getName();
         this.username = user.getUsername();
         this.email = user.getEmail();
-        if (user.getAddress() != null) {
-            this.address = new AddressResponse(user.getAddress());
+        if (user.getAddresses() != null || user.getAddresses().size() > 0) {
+            List<AddressResponse> addressResponseList = new ArrayList<>();
+            for (Address address : user.getAddresses()) {
+                AddressResponse addressResponse = new AddressResponse();
+                addressResponse.setAddress(address);
+                addressResponseList.add(addressResponse);
+            }
+            this.addresses = addressResponseList;
         } else {
-            this.address = null;
+            this.addresses = null;
         }
         this.phone = user.getPhone();
         this.website = user.getWebsite();
