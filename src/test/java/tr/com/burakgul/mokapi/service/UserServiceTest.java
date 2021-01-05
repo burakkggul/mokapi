@@ -11,7 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 import tr.com.burakgul.mokapi.dto.request.UserRequest;
 import tr.com.burakgul.mokapi.dto.response.InfoResponse;
 import tr.com.burakgul.mokapi.dto.response.UserResponse;
@@ -34,7 +33,7 @@ public class UserServiceTest {
 
     @Test
     void testSaveUsers() {
-        List<UserRequest> userRequests = Arrays.asList(Mockito.mock(UserRequest.class));
+        List<UserRequest> userRequests = Arrays.asList(Mockito.mock(UserRequest.class),Mockito.mock(UserRequest.class));
         User userMock = Mockito.mock(User.class);
         Mockito.when(userMock.getName()).thenReturn("Test0");
         Mockito.when(userRepository.save(ArgumentMatchers.any(User.class))).thenReturn(userMock);
@@ -45,7 +44,7 @@ public class UserServiceTest {
 
     @Test
     void testGetUsers() {
-        List<User> userMockList = Arrays.asList(Mockito.mock(User.class));
+        List<User> userMockList = Arrays.asList(Mockito.mock(User.class),Mockito.mock(User.class));
         Mockito.when(userMockList.get(0).getName()).thenReturn("Test");
         Mockito.when(userRepository.findAll()).thenReturn(userMockList);
         List<UserResponse> userResponseList = userService.getUsers();
@@ -54,7 +53,7 @@ public class UserServiceTest {
 
     @Test
     void testGetUserById() {
-        List<User> userMockList = Arrays.asList(Mockito.mock(User.class));
+        List<User> userMockList = Arrays.asList(Mockito.mock(User.class),Mockito.mock(User.class));
         Mockito.when(userMockList.get(0).getName()).thenReturn("Test0");
         Mockito.when(userRepository.findById(ArgumentMatchers.any(String.class))).thenReturn(Optional.of(userMockList.get(0)));
         UserResponse userResponse = userService.getUserById("Test");
@@ -87,7 +86,7 @@ public class UserServiceTest {
         Mockito.when(userRepository.findById(ArgumentMatchers.any(String.class))).thenReturn(Optional.of(userMock));
         InfoResponse infoResponse = userService.patchUserById("",jsonPatch);
         Assertions.assertEquals(200,infoResponse.getStatus());
-        Assertions.assertEquals(null,((UserResponse)infoResponse.getData()).getName());
+        Assertions.assertNull(((UserResponse)infoResponse.getData()).getName());
         Assertions.assertEquals("UserTest",((UserResponse)infoResponse.getData()).getUsername());
     }
 
