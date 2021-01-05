@@ -28,7 +28,7 @@ public class User {
         this.name = userRequest.getName();
         this.username = userRequest.getUsername();
         this.email = userRequest.getEmail();
-        if (userRequest.getAddresses() != null || userRequest.getAddresses().size() > 0) {
+        if (userRequest.getAddresses() != null && userRequest.getAddresses().size() > 0) {
             List<Address> addressList = new ArrayList<>();
             for (AddressRequest addressRequest : userRequest.getAddresses()) {
                 Address address = new Address();

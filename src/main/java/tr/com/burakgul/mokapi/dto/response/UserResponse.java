@@ -25,7 +25,7 @@ public class UserResponse {
         this.name = user.getName();
         this.username = user.getUsername();
         this.email = user.getEmail();
-        if (user.getAddresses() != null || user.getAddresses().size() > 0) {
+        if (user.getAddresses() != null && user.getAddresses().size() > 0) {
             List<AddressResponse> addressResponseList = new ArrayList<>();
             for (Address address : user.getAddresses()) {
                 AddressResponse addressResponse = new AddressResponse();
