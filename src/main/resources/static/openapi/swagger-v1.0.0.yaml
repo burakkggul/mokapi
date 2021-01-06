@@ -1,0 +1,335 @@
+swagger: "2.0"
+info:
+  description: "This project is fake REST API for testing and prototyping."
+  version: "1.0.0"
+  title: "Mokapi"
+  contact:
+    email: "burakkggul@gmail.com"
+  license:
+    name: "GNUv3"
+    url: "https://github.com/burakkggul/mokapi/blob/master/LICENSE"
+host: "localhost:8080"
+basePath: "/"
+tags:
+  - name: "Users"
+    description: "Endpoint to use get post put patch delete methods on user"
+schemes:
+  - "https"
+  - "http"
+paths:
+  /users/{ID}:
+    get:
+      tags:
+        - "Users"
+      summary: "Get all users."
+      parameters:
+        - in: "path"
+          name: "ID"
+          required: true
+          type: "string"
+          format: "ID"
+          description: "The ID of a specific user"
+      operationId: "getUserById"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Success"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+        "404":
+          description: "message: User not found."
+          schema:
+            $ref: "#/definitions/InfoResponse"
+        "500":
+          description: "message: An error occurred. We took note to fix it as soon as possible."
+          schema:
+            $ref: "#/definitions/InfoResponse"
+
+    delete:
+      tags:
+        - "Users"
+      summary: "Delete user by id."
+      operationId: "deleteUserById"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "ID"
+          required: true
+          type: "string"
+          format: "ID"
+          description: "The ID of a specific user"
+      responses:
+        "200":
+          description: "User has been successfully deleted."
+          schema:
+            $ref: "#/definitions/InfoResponse"
+
+        "500":
+          description: "message: An error occurred. We took note to fix it as soon as possible."
+          schema:
+            $ref: "#/definitions/InfoResponse"
+
+    put:
+      tags:
+        - "Users"
+      summary: "Update an existing user."
+      description: ""
+      parameters:
+        - in: "path"
+          name: "ID"
+          required: true
+          type: "string"
+          format: "ID"
+          description: "The ID of a specific user"
+        - in: "body"
+          name: "body"
+          description: "Pet object that needs to be added to the store"
+          required: true
+          schema:
+            $ref: "#/definitions/User"
+      operationId: "updateUserById"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Updated successfully."
+          schema:
+            $ref: "#/definitions/UserInfoResponse"
+        "404":
+          description: "message:User not found"
+          schema:
+            $ref: "#/definitions/InfoResponse"
+        "500":
+          description: "message: An error occurred. We took note to fix it as soon as possible."
+          schema:
+            $ref: "#/definitions/InfoResponse"
+
+    patch:
+      tags:
+        - "Users"
+      summary: "Changes a specific field of the object"
+      operationId: "patchUserById"
+      consumes:
+        - "application/json-patch+json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "ID"
+          required: true
+          type: "string"
+          format: "ID"
+          description: "The ID of a specific user"
+        - name: "JsonPatch"
+          in: "body"
+          required: true
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/JsonPatch"
+      responses:
+        '200':
+          description: "Patching was successful."
+          schema:
+            $ref: "#/definitions/UserInfoResponse"
+        "400":
+          description: "message:Bad Request"
+          schema:
+            $ref: "#/definitions/InfoResponse"
+        "404":
+          description: "message:User not found. You can use the post method to add users."
+          schema:
+            $ref: "#/definitions/InfoResponse"
+        "500":
+          description: "message: An error occurred. We took note to fix it as soon as possible."
+          schema:
+            $ref: "#/definitions/InfoResponse"
+
+  /users:
+    get:
+      tags:
+        - "Users"
+      summary: "Get all users."
+      operationId: "getUsers"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Success"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+        "404":
+          description: "message:User not found. You can use the post method to add users."
+          schema:
+            $ref: "#/definitions/InfoResponse"
+        "500":
+          description: "message: An error occurred. We took note to fix it as soon as possible."
+          schema:
+            $ref: "#/definitions/InfoResponse"
+
+    delete:
+      tags:
+        - "Users"
+      summary: "Delete all users."
+      description: ""
+      operationId: "deleteUsers"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "All users has been successfully deleted."
+          schema:
+            $ref: "#/definitions/InfoResponse"
+        "500":
+          description: "message: An error occurred. We took note to fix it as soon as possible."
+          schema:
+            $ref: "#/definitions/InfoResponse"
+
+    post:
+      tags:
+        - "Users"
+      summary: "Create users."
+      operationId: "CreateUsers"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "User list to be saved."
+          required: false
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+      responses:
+        "200":
+          description: "All users has been successfully deleted."
+          schema:
+            $ref: "#/definitions/UserListInfoResponse"
+        "500":
+          description: "message: An error occurred. We took note to fix it as soon as possible."
+          schema:
+            $ref: "#/definitions/InfoResponse"
+
+definitions:
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      name:
+        type: "string"
+      username:
+        type: "string"
+      email:
+        type: "string"
+      addresses:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            addressName:
+              type: "string"
+            addressLine:
+              type: "string"
+            country:
+              type: "string"
+            city:
+              type: "string"
+            zipcode:
+              type: "string"
+            latitude:
+              type: "string"
+            longitude:
+              type: "string"
+            active:
+              type: "boolean"
+      phone:
+        type: "string"
+      website:
+        type: "string"
+      company:
+        type: "object"
+        properties:
+          name:
+            type: "string"
+          catchPhrase:
+            type: "string"
+          bs:
+            type: "string"
+
+  InfoResponse:
+    type: "object"
+    properties:
+      timestamp:
+        type: "string"
+      status:
+        type: "integer"
+        format: "int64"
+      message:
+        type: "string"
+
+  UserInfoResponse:
+    type: "object"
+    properties:
+      timestamp:
+        type: "string"
+      status:
+        type: "integer"
+        format: "int64"
+      message:
+        type: "string"
+      data:
+        $ref: "#/definitions/User"
+
+  UserListInfoResponse:
+    type: "object"
+    properties:
+      timestamp:
+        type: "string"
+      status:
+        type: "integer"
+        format: "int64"
+        description: "HTTP Status Code"
+      message:
+        type: "string"
+      data:
+        type: "array"
+        items:
+          $ref: "#/definitions/User"
+
+  JsonPatch:
+    description: A JSONPatch document as defined by RFC 6902
+    required:
+      - "op"
+      - "path"
+    properties:
+      op:
+        type: string
+        description: The operation to be performed
+        enum:
+          - "add"
+          - "remove"
+          - "replace"
+          - "move"
+          - "copy"
+          - "test"
+      path:
+        type: string
+        description: A JSON-Pointer
+      value:
+        type: object
+        description: The value to be used within the operations.
+      from:
+        type: string
+        description: A string containing a JSON Pointer value.
