@@ -1,31 +1,22 @@
 package tr.com.burakgul.mokapi.model;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import tr.com.burakgul.mokapi.dto.request.AddressRequest;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
 @Setter
-@NoArgsConstructor
 public class Address {
+    @Field("address_name")
     private String addressName;
+    @Field("address_line")
     private String addressLine;
     private String country;
     private String city;
     private String zipcode;
-    private String latitude;
-    private String longitude;
+    private Geolocation geolocation;
+    @Field("communication_preference")
+    private CommunicationPreference communicationPreference;
     private Boolean active;
-
-    public void setAddressRequest(AddressRequest addressRequest) {
-        this.addressName = addressRequest.getAddressName();
-        this.addressLine = addressRequest.getAddressLine();
-        this.country = addressRequest.getCountry();
-        this.city = addressRequest.getCity();
-        this.zipcode = addressRequest.getZipcode();
-        this.latitude = addressRequest.getLatitude();
-        this.longitude = addressRequest.getLongitude();
-        this.active = addressRequest.getActive();
-    }
 }

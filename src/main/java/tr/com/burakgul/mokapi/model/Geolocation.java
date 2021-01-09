@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CommunicationPreference {
-    private Boolean sms;
-    private Boolean email;
+public class Geolocation {
+    private String latitude;
+    private String longitude;
 }

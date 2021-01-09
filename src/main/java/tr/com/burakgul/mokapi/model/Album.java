@@ -1,18 +1,15 @@
 package tr.com.burakgul.mokapi.model;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@Document
-public class Album {
-    @Id
-    private String id;
-    private String userId;
+public class Album{
     private String title;
+    @Field("image_path")
+    private String imagePath;
+    @Field("thumbnail_path")
+    private String thumbnailPath;
 }

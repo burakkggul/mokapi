@@ -1,27 +1,27 @@
 # MokApi
 
-This project is fake REST API for testing and prototyping.
-Read this in other languages: https://github.com/burakkggul/mokapi/blob/master/README.adoc[English], https://github.com/burakkggul/mokapi/blob/master/README-TR.adoc[Turkish].
+Bu proje test ve prototipleme için oluşturulmuş gerçek veriler barındırmayan bir Rest API'dır.
+Diğer dillerde okumak için: https://github.com/burakkggul/mokapi/blob/master/README.adoc[İngilizce], https://github.com/burakkggul/mokapi/blob/master/README-TR.adoc[Türkçe].
 
-## Installation
+## Kurulum
 
-#### Prerequisite
-
+#### Gereklilikler
 1. JDK 11
 2. Mongo DB 4.4.2
-Soon...
 
-## Usage
+Yakında...
 
-You can get a sample of requests that can be sent to all end points that can be used in the application from the tests available in `/jmeter/func_test.jmx`.
-For more information about Jmeter, click https://jmeter.apache.org[here].
+## Kullanım
+
+Uygulama içerisinde kullanılabilecek tüm uçlara atılabilecek isteklerin bir örneğini jmeter içerisinde hazır bulunan testlerden elde edebilirsiniz.
+Jmeter ile ilgili daha fazla bilgi almak için https://jmeter.apache.org[buraya] tıklayabilirsiniz.
+
 
 ### HTTP GET
 
-The HTTP GET method requests a representation of the specified resource. Requests using GET should only be used to request data (they shouldn't include data).
+HTTP GET metodu, belirtilen kaynakların tamamını almak için kullanılır. GET kullanan istekler yalnızca veri istemek için kullanılmalıdır (veri içermemelidir).
 
-Mokapi supports sending two different get requests to each endpoint.
-For example an answer is returned to the `/users` as follows.:
+Mokapi iki farklı GET isteğini aynı uç içerisinde barındırmaktadır. `/users` isteğine dönen cevap aşağıdaki gibidir:
 ```
 [
   {
@@ -97,7 +97,7 @@ For example an answer is returned to the `/users` as follows.:
 ]
 ```
 
-Another method is `/users/{id}` The id value given here should be the id of the related data:
+Başka bir yöntem ise `/users/{id}` şeklinde istek göndermektir. Burada verilen id değeri getirmek istediğimiz datanın id değerini içermelidir:
 ```
 {
   "id": "1",
@@ -138,9 +138,8 @@ Another method is `/users/{id}` The id value given here should be the id of the 
 
 ### HTTP POST
 
-POST is used to send data to a server to create a resource. Models should be sent as a list in the body of request.
-
-POST `/users` for the request, models should be sent in a list as below in the request body:
+POST metodu sunucu üzerinde kaynak oluştumak için kullanılır.
+POST `/users` isteği gönderilirken istek gövdesi içerisinde modeller liste şeklinde gönderilmelidir:
 ```
 [
   {
@@ -216,9 +215,9 @@ POST `/users` for the request, models should be sent in a list as below in the r
 
 ### HTTP PUT
 
-PUT is used to send data to a server to update a resource.
+PUT metodu sunucu içerisinde bulunan kaynakları güncellemek için kullanılır. Bu güncelleme işlemi id bazlı yapılmaktadır.
+PUT `/users` isteği için, istek gövdesi içerisinde user modeli gönderilmelidir.
 
-PUT `/users' for the request, models should be sent in request body:
 ```
 {
   "name": "Burak GUL",
@@ -255,7 +254,6 @@ PUT `/users' for the request, models should be sent in request body:
   }
 }
 ```
-
 
 ### HTTP PATCH
 The HTTP PATCH request body describes how the target resource should be modified to produce a new version. Furthermore, the format used to represent the [description of changes] varies depending on the resource type. For JSON resource types, the format used to describe the changes is https://tools.ietf.org/html/rfc6902#section-4.1[JSON Patch].
@@ -559,10 +557,12 @@ DELETE /users
 DELETE /users/1
 ```
 
+## Katılım
 
-## Contributing
-Soon...
+Yakında...
+
+## Lisans
+
+http://ozgurlisanslar.org.tr/gpl/gpl-v3/[GNU Genel Kamu Lisansı]
 
 
-## License
-https://github.com/burakkggul/mokapi/blob/master/LICENSE[GNUv3]
