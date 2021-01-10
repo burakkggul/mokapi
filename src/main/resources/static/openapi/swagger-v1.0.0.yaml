@@ -13,8 +13,6 @@ basePath: "/"
 tags:
   - name: "Users"
     description: "Endpoint to use get post put patch delete methods on user"
-  - name: "Albums"
-    description: "Endpoint to use get post put patch delete methods on user albums"
   - name: "Todos"
     description: "Endpoint to use get post put patch delete methods on user todos"
   - name: "Posts"
@@ -249,38 +247,6 @@ paths:
           schema:
             $ref: "#/definitions/InfoResponse"
 
-  /users/posts:
-
-    get:
-      tags:
-        - "Posts"
-      summary: "Get all users all posts."
-      operationId: "getPosts"
-      produces:
-        - "application/json"
-      parameters:
-        - in: "header"
-          name: "Access-Key"
-          type: "string"
-          format: string
-          required: false
-          description: "Access key providing data access authorization."
-      responses:
-        "200":
-          description: "Success"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Post"
-        "404":
-          description: "message:User not found. You can use the post method to add users."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-        "500":
-          description: "message: An error occurred. We took note to fix it as soon as possible."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-
   /users/{UserID}/posts:
 
     get:
@@ -343,7 +309,7 @@ paths:
           description: "The ID of a specific user"
         - in: "body"
           name: "body"
-          description: "User list to be saved."
+          description: "Post list to be saved."
           required: false
           schema:
             type: "array"
@@ -353,95 +319,7 @@ paths:
         "200":
           description: "All users has been successfully deleted."
           schema:
-            $ref: "#/definitions/UserListInfoResponse"
-        "500":
-          description: "message: An error occurred. We took note to fix it as soon as possible."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-
-    patch:
-      tags:
-        - "Posts"
-      summary: "Changes specific data of the posts by user id. JSON Patch is specified in RFC 6902 from the IETF."
-      operationId: "patchPostByUserId"
-      consumes:
-        - "application/json-patch+json"
-      produces:
-        - "application/json"
-      parameters:
-        - in: "header"
-          name: "Access-Key"
-          type: "string"
-          format: string
-          required: false
-          description: "Access key providing data access authorization."
-        - in: "path"
-          name: "UserID"
-          required: true
-          type: "string"
-          format: "UserID"
-          description: "The ID of a specific user"
-        - name: "JsonPatch"
-          in: "body"
-          required: true
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/JsonPatch"
-      responses:
-        '200':
-          description: "Patching was successful."
-          schema:
-            $ref: "#/definitions/UserInfoResponse"
-        "400":
-          description: "message:Bad Request"
-          schema:
-            $ref: "#/definitions/InfoResponse"
-        "404":
-          description: "message:User not found. You can use the post method to add users."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-        "500":
-          description: "message: An error occurred. We took note to fix it as soon as possible."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-
-    put:
-      tags:
-        - "Posts"
-      summary: "Update an existing posts by user id."
-      operationId: "updatePostByUserId"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
-      parameters:
-        - in: "header"
-          name: "Access-Key"
-          type: "string"
-          format: string
-          required: false
-          description: "Access key providing data access authorization."
-        - in: "path"
-          name: "ID"
-          required: true
-          type: "string"
-          format: "ID"
-          description: "The ID of a specific user"
-        - in: "body"
-          name: "body"
-          required: true
-          schema:
-            $ref: "#/definitions/Post"
-      responses:
-        "200":
-          description: "Updated successfully."
-          schema:
-            $ref: "#/definitions/UserInfoResponse"
-        "404":
-          description: "message:User not found"
-          schema:
-            $ref: "#/definitions/InfoResponse"
+            $ref: "#/definitions/PostListInfoResponse"
         "500":
           description: "message: An error occurred. We took note to fix it as soon as possible."
           schema:
@@ -450,7 +328,7 @@ paths:
     delete:
       tags:
         - "Posts"
-      summary: "Delete posts by user id."
+      summary: "Delete all posts by user id."
       operationId: "deletePostByUserId"
       produces:
         - "application/json"
@@ -469,7 +347,7 @@ paths:
           description: "The ID of a specific user"
       responses:
         "200":
-          description: "User has been successfully deleted."
+          description: "Posts has been successfully deleted."
           schema:
             $ref: "#/definitions/InfoResponse"
 
@@ -478,13 +356,13 @@ paths:
           schema:
             $ref: "#/definitions/InfoResponse"
 
-  /users/todos:
+  /users/posts/{PostID}:
 
     get:
       tags:
-        - "Todos"
-      summary: "Get all users all todos."
-      operationId: "getTodos"
+        - "Posts"
+      summary: "Get post by post id."
+      operationId: "getPostByPostID"
       produces:
         - "application/json"
       parameters:
@@ -494,13 +372,19 @@ paths:
           format: string
           required: false
           description: "Access key providing data access authorization."
+        - in: "path"
+          name: "PostID"
+          required: true
+          type: "string"
+          format: "PostID"
+          description: "The ID of a specific post"
       responses:
         "200":
           description: "Success"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/Todo"
+              $ref: "#/definitions/Post"
         "404":
           description: "message:User not found. You can use the post method to add users."
           schema:
@@ -509,6 +393,391 @@ paths:
           description: "message: An error occurred. We took note to fix it as soon as possible."
           schema:
             $ref: "#/definitions/InfoResponse"
+
+    put:
+      tags:
+        - "Posts"
+      summary: "Update an existing post by post id."
+      operationId: "updatePostByPostId"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "header"
+          name: "Access-Key"
+          type: "string"
+          format: string
+          required: false
+          description: "Access key providing data access authorization."
+        - in: "path"
+          name: "PostID"
+          required: true
+          type: "string"
+          format: "PostID"
+          description: "The ID of a specific post"
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Post"
+      responses:
+        "200":
+          description: "Updated successfully."
+          schema:
+            $ref: "#/definitions/PostInfoResponse"
+        "404":
+          description: "message:User not found"
+          schema:
+            $ref: "#/definitions/InfoResponse"
+        "500":
+          description: "message: An error occurred. We took note to fix it as soon as possible."
+          schema:
+            $ref: "#/definitions/InfoResponse"
+
+    patch:
+      tags:
+        - "Posts"
+      summary: "Changes specific data of the post by post id. JSON Patch is specified in RFC 6902 from the IETF."
+      operationId: "patchPostByUserId"
+      consumes:
+        - "application/json-patch+json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "header"
+          name: "Access-Key"
+          type: "string"
+          format: string
+          required: false
+          description: "Access key providing data access authorization."
+        - in: "path"
+          name: "PostID"
+          required: true
+          type: "string"
+          format: "PostID"
+          description: "The ID of a specific post"
+        - name: "JsonPatch"
+          in: "body"
+          required: true
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/JsonPatch"
+      responses:
+        '200':
+          description: "Patching was successful."
+          schema:
+            $ref: "#/definitions/PostInfoResponse"
+        "400":
+          description: "message:Bad Request"
+          schema:
+            $ref: "#/definitions/InfoResponse"
+        "404":
+          description: "message:User not found. You can use the post method to add users."
+          schema:
+            $ref: "#/definitions/InfoResponse"
+        "500":
+          description: "message: An error occurred. We took note to fix it as soon as possible."
+          schema:
+            $ref: "#/definitions/InfoResponse"
+
+    delete:
+      tags:
+        - "Posts"
+      summary: "Delete post by post id."
+      operationId: "deletePostByPostId"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "header"
+          name: "Access-Key"
+          type: "string"
+          format: string
+          required: false
+          description: "Access key providing data access authorization."
+        - in: "path"
+          name: "PostID"
+          required: true
+          type: "string"
+          format: "PostID"
+          description: "The ID of a specific post"
+      responses:
+        "200":
+          description: "Post has been successfully deleted."
+          schema:
+            $ref: "#/definitions/InfoResponse"
+
+        "500":
+          description: "message: An error occurred. We took note to fix it as soon as possible."
+          schema:
+            $ref: "#/definitions/InfoResponse"
+
+  /users/posts/{PostID}/comments:
+
+    get:
+      tags:
+        - "Comments"
+      summary: "Get all comments by post id."
+      operationId: "getCommentsByPostID"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "header"
+          name: "Access-Key"
+          type: "string"
+          format: string
+          required: false
+          description: "Access key providing data access authorization."
+        - in: "path"
+          name: "PostID"
+          required: true
+          type: "string"
+          format: "PostID"
+          description: "The ID of a specific post"
+      responses:
+        "200":
+          description: "Success"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Comment"
+        "404":
+          description: "message: User not found."
+          schema:
+            $ref: "#/definitions/InfoResponse"
+        "500":
+          description: "message: An error occurred. We took note to fix it as soon as possible."
+          schema:
+            $ref: "#/definitions/InfoResponse"
+
+    post:
+      tags:
+        - "Comments"
+      summary: "Create multiple comments by post id."
+      operationId: "CreateCommentsByPostID"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "header"
+          name: "Access-Key"
+          type: "string"
+          format: string
+          required: false
+          description: "Access key providing data access authorization."
+        - in: "path"
+          name: "PostID"
+          required: true
+          type: "string"
+          format: "PostID"
+          description: "The ID of a specific post"
+        - in: "body"
+          name: "body"
+          description: "Post list to be saved."
+          required: false
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Comment"
+      responses:
+        "200":
+          description: "All users has been successfully deleted."
+          schema:
+            $ref: "#/definitions/CommentListInfoResponse"
+        "500":
+          description: "message: An error occurred. We took note to fix it as soon as possible."
+          schema:
+            $ref: "#/definitions/InfoResponse"
+
+    delete:
+      tags:
+        - "Comments"
+      summary: "Delete comments by post id."
+      operationId: "deleteCommentsByPostID"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "header"
+          name: "Access-Key"
+          type: "string"
+          format: string
+          required: false
+          description: "Access key providing data access authorization."
+        - in: "path"
+          name: "PostID"
+          required: true
+          type: "string"
+          format: "PostID"
+          description: "The ID of a specific user"
+      responses:
+        "200":
+          description: "Posts has been successfully deleted."
+          schema:
+            $ref: "#/definitions/InfoResponse"
+
+        "500":
+          description: "message: An error occurred. We took note to fix it as soon as possible."
+          schema:
+            $ref: "#/definitions/InfoResponse"
+
+  /users/posts/comments/{CommentID}:
+
+      get:
+        tags:
+          - "Comments"
+        summary: "Get comment by comment id."
+        operationId: "getPosts"
+        produces:
+          - "application/json"
+        parameters:
+          - in: "header"
+            name: "Access-Key"
+            type: "string"
+            format: string
+            required: false
+            description: "Access key providing data access authorization."
+          - in: "path"
+            name: "CommentID"
+            required: true
+            type: "string"
+            format: "CommentID"
+            description: "The ID of a specific post"
+        responses:
+          "200":
+            description: "Success"
+            schema:
+              type: "array"
+              items:
+                $ref: "#/definitions/Comment"
+          "404":
+            description: "message:User not found. You can use the post method to add users."
+            schema:
+              $ref: "#/definitions/InfoResponse"
+          "500":
+            description: "message: An error occurred. We took note to fix it as soon as possible."
+            schema:
+              $ref: "#/definitions/InfoResponse"
+
+      put:
+        tags:
+          - "Comments"
+        summary: "Update an existing comment by comment id."
+        operationId: "updateCommentByCommentId"
+        consumes:
+          - "application/json"
+        produces:
+          - "application/json"
+        parameters:
+          - in: "header"
+            name: "Access-Key"
+            type: "string"
+            format: string
+            required: false
+            description: "Access key providing data access authorization."
+          - in: "path"
+            name: "CommentID"
+            required: true
+            type: "string"
+            format: "CommentID"
+            description: "The ID of a specific comment"
+          - in: "body"
+            name: "body"
+            required: true
+            schema:
+              $ref: "#/definitions/Comment"
+        responses:
+          "200":
+            description: "Updated successfully."
+            schema:
+              $ref: "#/definitions/CommentInfoResponse"
+          "404":
+            description: "message:User not found"
+            schema:
+              $ref: "#/definitions/InfoResponse"
+          "500":
+            description: "message: An error occurred. We took note to fix it as soon as possible."
+            schema:
+              $ref: "#/definitions/InfoResponse"
+
+      patch:
+        tags:
+          - "Comments"
+        summary: "Changes specific data of the Comment by comment id. JSON Patch is specified in RFC 6902 from the IETF."
+        operationId: "patchCommentByCommentId"
+        consumes:
+          - "application/json-patch+json"
+        produces:
+          - "application/json"
+        parameters:
+          - in: "header"
+            name: "Access-Key"
+            type: "string"
+            format: string
+            required: false
+            description: "Access key providing data access authorization."
+          - in: "path"
+            name: "CommentID"
+            required: true
+            type: "string"
+            format: "CommentID"
+            description: "The ID of a specific comment"
+          - name: "JsonPatch"
+            in: "body"
+            required: true
+            schema:
+              type: "array"
+              items:
+                $ref: "#/definitions/JsonPatch"
+        responses:
+          '200':
+            description: "Patching was successful."
+            schema:
+              $ref: "#/definitions/CommentInfoResponse"
+          "400":
+            description: "message:Bad Request"
+            schema:
+              $ref: "#/definitions/InfoResponse"
+          "404":
+            description: "message:User not found. You can use the post method to add users."
+            schema:
+              $ref: "#/definitions/InfoResponse"
+          "500":
+            description: "message: An error occurred. We took note to fix it as soon as possible."
+            schema:
+              $ref: "#/definitions/InfoResponse"
+
+      delete:
+        tags:
+          - "Comments"
+        summary: "Delete comment by comment id."
+        operationId: "deleteCommentByCommentId"
+        produces:
+          - "application/json"
+        parameters:
+          - in: "header"
+            name: "Access-Key"
+            type: "string"
+            format: string
+            required: false
+            description: "Access key providing data access authorization."
+          - in: "path"
+            name: "CommentID"
+            required: true
+            type: "string"
+            format: "CommentID"
+            description: "The ID of a specific user"
+        responses:
+          "200":
+            description: "User has been successfully deleted."
+            schema:
+              $ref: "#/definitions/InfoResponse"
+
+          "500":
+            description: "message: An error occurred. We took note to fix it as soon as possible."
+            schema:
+              $ref: "#/definitions/InfoResponse"
 
   /users/{UserID}/todos:
 
@@ -538,7 +807,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/Post"
+              $ref: "#/definitions/Todo"
         "404":
           description: "message: User not found."
           schema:
@@ -572,105 +841,17 @@ paths:
           description: "The ID of a specific user"
         - in: "body"
           name: "body"
-          description: "Post list to be saved."
+          description: "Todo list to be saved."
           required: false
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/Post"
+              $ref: "#/definitions/Todo"
       responses:
         "200":
           description: "All users has been successfully deleted."
           schema:
-            $ref: "#/definitions/InfoResponse"
-        "500":
-          description: "message: An error occurred. We took note to fix it as soon as possible."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-
-    patch:
-      tags:
-        - "Todos"
-      summary: "Changes specific data of the todos by user id. JSON Patch is specified in RFC 6902 from the IETF."
-      operationId: "patchTodoByUserId"
-      consumes:
-        - "application/json-patch+json"
-      produces:
-        - "application/json"
-      parameters:
-        - in: "header"
-          name: "Access-Key"
-          type: "string"
-          format: string
-          required: false
-          description: "Access key providing data access authorization."
-        - in: "path"
-          name: "UserID"
-          required: true
-          type: "string"
-          format: "UserID"
-          description: "The ID of a specific user"
-        - name: "JsonPatch"
-          in: "body"
-          required: true
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/JsonPatch"
-      responses:
-        '200':
-          description: "Patching was successful."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-        "400":
-          description: "message:Bad Request"
-          schema:
-            $ref: "#/definitions/InfoResponse"
-        "404":
-          description: "message:User not found. You can use the post method to add users."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-        "500":
-          description: "message: An error occurred. We took note to fix it as soon as possible."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-
-    put:
-      tags:
-        - "Todos"
-      summary: "Update an existing todos by user id."
-      operationId: "updateTodoByUserId"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
-      parameters:
-        - in: "header"
-          name: "Access-Key"
-          type: "string"
-          format: string
-          required: false
-          description: "Access key providing data access authorization."
-        - in: "path"
-          name: "ID"
-          required: true
-          type: "string"
-          format: "ID"
-          description: "The ID of a specific user"
-        - in: "body"
-          name: "body"
-          required: true
-          schema:
-            $ref: "#/definitions/Todo"
-      responses:
-        "200":
-          description: "Updated successfully."
-          schema:
-            $ref: "#/definitions/UserInfoResponse"
-        "404":
-          description: "message:User not found"
-          schema:
-            $ref: "#/definitions/InfoResponse"
+            $ref: "#/definitions/TodoListInfoResponse"
         "500":
           description: "message: An error occurred. We took note to fix it as soon as possible."
           schema:
@@ -679,7 +860,7 @@ paths:
     delete:
       tags:
         - "Todos"
-      summary: "Delete todos by user id."
+      summary: "Delete all todos by user id."
       operationId: "deleteTodoByUserId"
       produces:
         - "application/json"
@@ -698,7 +879,7 @@ paths:
           description: "The ID of a specific user"
       responses:
         "200":
-          description: "User has been successfully deleted."
+          description: "Todos has been successfully deleted."
           schema:
             $ref: "#/definitions/InfoResponse"
 
@@ -707,45 +888,13 @@ paths:
           schema:
             $ref: "#/definitions/InfoResponse"
 
-  /users/comments:
+  /users/todos/{TodoID}:
 
     get:
       tags:
-        - "Comments"
-      summary: "Get all users all comments."
-      operationId: "getComments"
-      produces:
-        - "application/json"
-      parameters:
-        - in: "header"
-          name: "Access-Key"
-          type: "string"
-          format: string
-          required: false
-          description: "Access key providing data access authorization."
-      responses:
-        "200":
-          description: "Success"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Comment"
-        "404":
-          description: "message:User not found. You can use the post method to add users."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-        "500":
-          description: "message: An error occurred. We took note to fix it as soon as possible."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-
-  /users/{UserID}/comments:
-
-    get:
-      tags:
-        - "Comments"
-      summary: "Get all comments by user id."
-      operationId: "getCommentByUserID"
+        - "Todos"
+      summary: "Get todo by todo id."
+      operationId: "getTodoByTodoID"
       produces:
         - "application/json"
       parameters:
@@ -756,20 +905,20 @@ paths:
           required: false
           description: "Access key providing data access authorization."
         - in: "path"
-          name: "UserID"
+          name: "TodoID"
           required: true
           type: "string"
-          format: "UserID"
-          description: "The ID of a specific user"
+          format: "TodoID"
+          description: "The ID of a specific todo"
       responses:
         "200":
           description: "Success"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/Comment"
+              $ref: "#/definitions/Todo"
         "404":
-          description: "message: User not found."
+          description: "message:User not found. You can use the post method to add users."
           schema:
             $ref: "#/definitions/InfoResponse"
         "500":
@@ -777,11 +926,11 @@ paths:
           schema:
             $ref: "#/definitions/InfoResponse"
 
-    post:
+    put:
       tags:
-        - "Comments"
-      summary: "Create multiple comments by user id."
-      operationId: "CreateCommentsByUserID"
+        - "Todos"
+      summary: "Update an existing todo by todo id."
+      operationId: "updateTodoByTodoId"
       consumes:
         - "application/json"
       produces:
@@ -794,22 +943,23 @@ paths:
           required: false
           description: "Access key providing data access authorization."
         - in: "path"
-          name: "UserID"
+          name: "TodoID"
           required: true
           type: "string"
-          format: "UserID"
-          description: "The ID of a specific user"
+          format: "TodoID"
+          description: "The ID of a specific todo"
         - in: "body"
           name: "body"
-          description: "Post list to be saved."
-          required: false
+          required: true
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Comment"
+            $ref: "#/definitions/Post"
       responses:
         "200":
-          description: "All users has been successfully deleted."
+          description: "Updated successfully."
+          schema:
+            $ref: "#/definitions/TodoInfoResponse"
+        "404":
+          description: "message:User not found"
           schema:
             $ref: "#/definitions/InfoResponse"
         "500":
@@ -819,9 +969,9 @@ paths:
 
     patch:
       tags:
-        - "Comments"
-      summary: "Changes specific data of the comments by user id. JSON Patch is specified in RFC 6902 from the IETF."
-      operationId: "patchCommentByUserId"
+        - "Todos"
+      summary: "Changes specific data of the todo by todo id. JSON Patch is specified in RFC 6902 from the IETF."
+      operationId: "patchTodoByTodoId"
       consumes:
         - "application/json-patch+json"
       produces:
@@ -834,11 +984,11 @@ paths:
           required: false
           description: "Access key providing data access authorization."
         - in: "path"
-          name: "UserID"
+          name: "TodoID"
           required: true
           type: "string"
-          format: "UserID"
-          description: "The ID of a specific user"
+          format: "TodoID"
+          description: "The ID of a specific todo"
         - name: "JsonPatch"
           in: "body"
           required: true
@@ -850,7 +1000,7 @@ paths:
         '200':
           description: "Patching was successful."
           schema:
-            $ref: "#/definitions/InfoResponse"
+            $ref: "#/definitions/TodoInfoResponse"
         "400":
           description: "message:Bad Request"
           schema:
@@ -864,52 +1014,11 @@ paths:
           schema:
             $ref: "#/definitions/InfoResponse"
 
-    put:
-      tags:
-        - "Comments"
-      summary: "Update an existing comments by user id."
-      operationId: "updateUserById"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
-      parameters:
-        - in: "header"
-          name: "Access-Key"
-          type: "string"
-          format: string
-          required: false
-          description: "Access key providing data access authorization."
-        - in: "path"
-          name: "ID"
-          required: true
-          type: "string"
-          format: "ID"
-          description: "The ID of a specific user"
-        - in: "body"
-          name: "body"
-          required: true
-          schema:
-            $ref: "#/definitions/Comment"
-      responses:
-        "200":
-          description: "Updated successfully."
-          schema:
-            $ref: "#/definitions/UserInfoResponse"
-        "404":
-          description: "message:User not found"
-          schema:
-            $ref: "#/definitions/InfoResponse"
-        "500":
-          description: "message: An error occurred. We took note to fix it as soon as possible."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-
     delete:
       tags:
-        - "Comments"
-      summary: "Delete comments by user id."
-      operationId: "deleteTodoByUserId"
+        - "Todos"
+      summary: "Delete todo by todo id."
+      operationId: "deleteTodoByTodoId"
       produces:
         - "application/json"
       parameters:
@@ -920,243 +1029,14 @@ paths:
           required: false
           description: "Access key providing data access authorization."
         - in: "path"
-          name: "UserID"
+          name: "TodoID"
           required: true
           type: "string"
-          format: "UserID"
-          description: "The ID of a specific user"
+          format: "TodoID"
+          description: "The ID of a specific todo"
       responses:
         "200":
-          description: "User has been successfully deleted."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-
-        "500":
-          description: "message: An error occurred. We took note to fix it as soon as possible."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-
-  /users/albums:
-
-    get:
-      tags:
-        - "Albums"
-      summary: "Get all users all albums."
-      operationId: "getComments"
-      produces:
-        - "application/json"
-      parameters:
-        - in: "header"
-          name: "Access-Key"
-          type: "string"
-          format: string
-          required: false
-          description: "Access key providing data access authorization."
-      responses:
-        "200":
-          description: "Success"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Album"
-        "404":
-          description: "message:User not found. You can use the post method to add users."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-        "500":
-          description: "message: An error occurred. We took note to fix it as soon as possible."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-
-  /users/{UserID}/albums:
-
-    get:
-      tags:
-        - "Albums"
-      summary: "Get all albums by user id."
-      operationId: "getAlbumByUserID"
-      produces:
-        - "application/json"
-      parameters:
-        - in: "header"
-          name: "Access-Key"
-          type: "string"
-          format: string
-          required: false
-          description: "Access key providing data access authorization."
-        - in: "path"
-          name: "UserID"
-          required: true
-          type: "string"
-          format: "UserID"
-          description: "The ID of a specific user"
-      responses:
-        "200":
-          description: "Success"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Album"
-        "404":
-          description: "message: User not found."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-        "500":
-          description: "message: An error occurred. We took note to fix it as soon as possible."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-
-    post:
-      tags:
-        - "Albums"
-      summary: "Create multiple albums by user id."
-      operationId: "CreateCommentsByUserID"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
-      parameters:
-        - in: "header"
-          name: "Access-Key"
-          type: "string"
-          format: string
-          required: false
-          description: "Access key providing data access authorization."
-        - in: "path"
-          name: "UserID"
-          required: true
-          type: "string"
-          format: "UserID"
-          description: "The ID of a specific user"
-        - in: "body"
-          name: "body"
-          description: "Albums list to be saved."
-          required: false
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/AlbumRequest"
-      responses:
-        "200":
-          description: "All users has been successfully deleted."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-        "500":
-          description: "message: An error occurred. We took note to fix it as soon as possible."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-
-    patch:
-      tags:
-        - "Albums"
-      summary: "Changes specific data of the albums by user id. JSON Patch is specified in RFC 6902 from the IETF."
-      operationId: "patchAlbumByUserId"
-      consumes:
-        - "application/json-patch+json"
-      produces:
-        - "application/json"
-      parameters:
-        - in: "header"
-          name: "Access-Key"
-          type: "string"
-          format: string
-          required: false
-          description: "Access key providing data access authorization."
-        - in: "path"
-          name: "UserID"
-          required: true
-          type: "string"
-          format: "UserID"
-          description: "The ID of a specific user"
-        - name: "JsonPatch"
-          in: "body"
-          required: true
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/JsonPatch"
-      responses:
-        '200':
-          description: "Patching was successful."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-        "400":
-          description: "message:Bad Request"
-          schema:
-            $ref: "#/definitions/InfoResponse"
-        "404":
-          description: "message:User not found. You can use the post method to add users."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-        "500":
-          description: "message: An error occurred. We took note to fix it as soon as possible."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-
-    put:
-      tags:
-        - "Albums"
-      summary: "Update an existing albums by user id."
-      operationId: "updateAlbumsByUserId"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
-      parameters:
-        - in: "header"
-          name: "Access-Key"
-          type: "string"
-          format: string
-          required: false
-          description: "Access key providing data access authorization."
-        - in: "path"
-          name: "ID"
-          required: true
-          type: "string"
-          format: "ID"
-          description: "The ID of a specific user"
-        - in: "body"
-          name: "body"
-          required: true
-          schema:
-            $ref: "#/definitions/AlbumRequest"
-      responses:
-        "200":
-          description: "Updated successfully."
-          schema:
-            $ref: "#/definitions/UserInfoResponse"
-        "404":
-          description: "message:User not found"
-          schema:
-            $ref: "#/definitions/InfoResponse"
-        "500":
-          description: "message: An error occurred. We took note to fix it as soon as possible."
-          schema:
-            $ref: "#/definitions/InfoResponse"
-
-    delete:
-      tags:
-        - "Albums"
-      summary: "Delete albums by user id."
-      operationId: "deleteTodoByUserId"
-      produces:
-        - "application/json"
-      parameters:
-        - in: "header"
-          name: "Access-Key"
-          type: "string"
-          format: string
-          required: false
-          description: "Access key providing data access authorization."
-        - in: "path"
-          name: "UserID"
-          required: true
-          type: "string"
-          format: "UserID"
-          description: "The ID of a specific user"
-      responses:
-        "200":
-          description: "User has been successfully deleted."
+          description: "Post has been successfully deleted."
           schema:
             $ref: "#/definitions/InfoResponse"
 
@@ -1254,28 +1134,6 @@ definitions:
       body:
         type: "string"
 
-  Album:
-    type: "object"
-    properties:
-      title:
-        type: "string"
-      imagePath:
-        type: "string"
-      thumbnailPath:
-        type: "string"
-
-  AlbumRequest:
-    type: "object"
-    properties:
-      title:
-        type: "string"
-      image:
-        type: "string"
-        format: "byte"
-      thumbnail:
-        type: "string"
-        format: "byte"
-
   InfoResponse:
     type: "object"
     properties:
@@ -1286,6 +1144,45 @@ definitions:
         format: "int64"
       message:
         type: "string"
+
+  CommentInfoResponse:
+    type: "object"
+    properties:
+      timestamp:
+        type: "string"
+      status:
+        type: "integer"
+        format: "int64"
+      message:
+        type: "string"
+      data:
+        $ref: "#/definitions/Comment"
+
+  TodoInfoResponse:
+    type: "object"
+    properties:
+      timestamp:
+        type: "string"
+      status:
+        type: "integer"
+        format: "int64"
+      message:
+        type: "string"
+      data:
+        $ref: "#/definitions/Todo"
+
+  PostInfoResponse:
+    type: "object"
+    properties:
+      timestamp:
+        type: "string"
+      status:
+        type: "integer"
+        format: "int64"
+      message:
+        type: "string"
+      data:
+        $ref: "#/definitions/Post"
 
   UserInfoResponse:
     type: "object"
@@ -1315,6 +1212,54 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/User"
+
+  TodoListInfoResponse:
+    type: "object"
+    properties:
+      timestamp:
+        type: "string"
+      status:
+        type: "integer"
+        format: "int64"
+        description: "HTTP Status Code"
+      message:
+        type: "string"
+      data:
+        type: "array"
+        items:
+          $ref: "#/definitions/Todo"
+
+  CommentListInfoResponse:
+    type: "object"
+    properties:
+      timestamp:
+        type: "string"
+      status:
+        type: "integer"
+        format: "int64"
+        description: "HTTP Status Code"
+      message:
+        type: "string"
+      data:
+        type: "array"
+        items:
+          $ref: "#/definitions/Comment"
+
+  PostListInfoResponse:
+    type: "object"
+    properties:
+      timestamp:
+        type: "string"
+      status:
+        type: "integer"
+        format: "int64"
+        description: "HTTP Status Code"
+      message:
+        type: "string"
+      data:
+        type: "array"
+        items:
+          $ref: "#/definitions/Post"
 
   JsonPatch:
     description: A JSONPatch document as defined by RFC 6902
