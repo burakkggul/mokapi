@@ -7,13 +7,13 @@
     "addresses": [
       {
         "addressName": "Home",
-        "addressLine": "561 Sutteridge Plaza",
-        "country": "Russia",
-        "city": "Komendantsky aerodrom",
-        "zipcode": "347703",
+        "addressLine": "Altay Eryaman",
+        "country": "Turkey",
+        "city": "Ankara",
+        "zipcode": "06690",
         "geolocation": {
-          "longitude": "19.0904515",
-          "latitude": "49.7624347"
+          "longitude": 32.634198,
+          "latitude": 39.967806
         },
         "communicationPreference": {
           "sms": true,
@@ -28,8 +28,8 @@
         "city": "Pulo",
         "zipcode": "1706",
         "geolocation": {
-          "longitude": "-47.058302",
-          "latitude": "-1.7437356"
+          "longitude": -47.058302,
+          "latitude": -1.7437356
         },
         "communicationPreference": {
           "sms": false,
@@ -38,11 +38,11 @@
         "active": true
       }
     ],
-    "phone": "+90 432 454 4545",
-    "website": "https://goo.ne.jp",
+    "phone": "+90 543 443 04 68",
+    "website": "https://www.burakgul.com.tr",
     "company": {
-      "name": "Jast, Daniel and Satterfield",
-      "catchPhrase": "Down-sized discrete success"
+      "name": "Özgür Yazılım A.Ş.",
+      "catchPhrase": "Şeffaf Teknoloji, Özel Çözümler"
     }
   },
   {
@@ -58,8 +58,8 @@
         "city": "Olszówka",
         "zipcode": "62-641",
         "geolocation": {
-          "longitude": "12.6257516",
-          "latitude": "50.1922582"
+          "longitude": 12.6257516,
+          "latitude": 50.1922582
         },
         "communicationPreference": {
           "sms": true,
@@ -74,8 +74,8 @@
         "city": "Krugersdorp",
         "zipcode": "1933",
         "geolocation": {
-          "longitude": "43.200317",
-          "latitude": "57.7856103"
+          "longitude": 43.200317,
+          "latitude": 57.7856103
         },
         "communicationPreference": {
           "sms": false,
@@ -90,8 +90,8 @@
         "city": "Bertoua",
         "zipcode": null,
         "geolocation": {
-          "longitude": "114.847075",
-          "latitude": "38.021567"
+          "longitude": 114.847075,
+          "latitude": 38.021567
         },
         "communicationPreference": {
           "sms": true,
@@ -106,8 +106,8 @@
         "city": "Yongchuan",
         "zipcode": null,
         "geolocation": {
-          "longitude": "114.908822",
-          "latitude": "38.174362"
+          "longitude": 114.908822,
+          "latitude": 38.174362
         },
         "communicationPreference": {
           "sms": true,
@@ -136,8 +136,8 @@
         "city": "Klimontów",
         "zipcode": "32-112",
         "geolocation": {
-          "longitude": "29.6904746",
-          "latitude": "-1.2834307"
+          "longitude": 29.6904746,
+          "latitude": -1.2834307
         },
         "communicationPreference": {
           "sms": true,
@@ -152,8 +152,8 @@
         "city": "Huaranchal",
         "zipcode": null,
         "geolocation": {
-          "longitude": "13.6275894",
-          "latitude": "10.8909284"
+          "longitude": 13.6275894,
+          "latitude": 10.8909284
         },
         "communicationPreference": {
           "sms": true,
@@ -182,8 +182,8 @@
         "city": "Hluhluwe",
         "zipcode": "3960",
         "geolocation": {
-          "longitude": "-52.2516426",
-          "latitude": "-15.8958471"
+          "longitude": -52.2516426,
+          "latitude": -15.8958471
         },
         "communicationPreference": {
           "sms": true,
@@ -212,8 +212,8 @@
         "city": "Licun",
         "zipcode": null,
         "geolocation": {
-          "longitude": "-77.069999",
-          "latitude": "-12.0904353"
+          "longitude": -77.069999,
+          "latitude": -12.0904353
         },
         "communicationPreference": {
           "sms": true,
@@ -242,8 +242,8 @@
         "city": "Gurung",
         "zipcode": null,
         "geolocation": {
-          "longitude": "113.4956",
-          "latitude": "-8.3653"
+          "longitude": 113.4956,
+          "latitude": -8.3653
         },
         "communicationPreference": {
           "sms": true,
@@ -272,8 +272,8 @@
         "city": "Banjar Kertasari",
         "zipcode": null,
         "geolocation": {
-          "longitude": "15.2242807",
-          "latitude": "49.5318094"
+          "longitude": 15.2242807,
+          "latitude": 49.5318094
         },
         "communicationPreference": {
           "sms": true,
@@ -302,8 +302,8 @@
         "city": "Na Yung",
         "zipcode": "41380",
         "geolocation": {
-          "longitude": "115.814504",
-          "latitude": "32.890479"
+          "longitude": 115.814504,
+          "latitude": 32.890479
         },
         "communicationPreference": {
           "sms": true,
@@ -332,8 +332,8 @@
         "city": "Petäjävesi",
         "zipcode": "41901",
         "geolocation": {
-          "longitude": "-74.6180833",
-          "latitude": "-15.4384565"
+          "longitude": -74.6180833,
+          "latitude": -15.4384565
         },
         "communicationPreference": {
           "sms": true,
@@ -362,8 +362,8 @@
         "city": "Xiuyu",
         "zipcode": null,
         "geolocation": {
-          "longitude": "-74.6180833",
-          "latitude": "-15.4384565"
+          "longitude": -74.6180833,
+          "latitude": -15.4384565
         },
         "communicationPreference": {
           "sms": true,
@@ -392,8 +392,8 @@
         "city": "Anápolis",
         "zipcode": "75000-000",
         "geolocation": {
-          "longitude": "35.6160558",
-          "latitude": "30.8337059"
+          "longitude": 35.6160558,
+          "latitude": 30.8337059
         },
         "communicationPreference": {
           "sms": true,
@@ -422,8 +422,8 @@
         "city": "Salgueiro",
         "zipcode": "56000-000",
         "geolocation": {
-          "longitude": "168.0177331",
-          "latitude": "-46.3478987"
+          "longitude": 168.0177331,
+          "latitude": -46.3478987
         },
         "communicationPreference": {
           "sms": true,
@@ -452,8 +452,8 @@
         "city": "Villach",
         "zipcode": "9580",
         "geolocation": {
-          "longitude": "-6.1157412",
-          "latitude": "53.2774963"
+          "longitude": -6.1157412,
+          "latitude": 53.2774963
         },
         "communicationPreference": {
           "sms": true,
@@ -482,8 +482,8 @@
         "city": "Xinlin",
         "zipcode": null,
         "geolocation": {
-          "longitude": "112.4962138",
-          "latitude": "34.6914551"
+          "longitude": 112.4962138,
+          "latitude": 34.6914551
         },
         "communicationPreference": {
           "sms": true,
@@ -512,8 +512,8 @@
         "city": "Waiwukak",
         "zipcode": null,
         "geolocation": {
-          "longitude": "108.8076195",
-          "latitude": "23.7247599"
+          "longitude": 108.8076195,
+          "latitude": 23.7247599
         },
         "communicationPreference": {
           "sms": true,
@@ -542,8 +542,8 @@
         "city": "Penja",
         "zipcode": null,
         "geolocation": {
-          "longitude": "44.0788197",
-          "latitude": "40.0678351"
+          "longitude": 44.0788197,
+          "latitude": 40.0678351
         },
         "communicationPreference": {
           "sms": true,
@@ -572,8 +572,8 @@
         "city": "Bondoukou",
         "zipcode": null,
         "geolocation": {
-          "longitude": "108.329633",
-          "latitude": "34.062917"
+          "longitude": 108.329633,
+          "latitude": 34.062917
         },
         "communicationPreference": {
           "sms": true,
@@ -588,8 +588,8 @@
         "city": "Tonekābon",
         "zipcode": null,
         "geolocation": {
-          "longitude": "-64.8318347",
-          "latitude": "9.4546148"
+          "longitude": -64.8318347,
+          "latitude": 9.4546148
         },
         "communicationPreference": {
           "sms": true,
@@ -604,8 +604,8 @@
         "city": "Dniprodzerzhyns’k",
         "zipcode": null,
         "geolocation": {
-          "longitude": "118.796877",
-          "latitude": "32.060255"
+          "longitude": 118.796877,
+          "latitude": 32.060255
         },
         "communicationPreference": {
           "sms": true,
@@ -634,8 +634,8 @@
         "city": "Patpata Segundo",
         "zipcode": "3604",
         "geolocation": {
-          "longitude": "119.700816",
-          "latitude": "29.0994968"
+          "longitude": 119.700816,
+          "latitude": 29.0994968
         },
         "communicationPreference": {
           "sms": true,
@@ -664,8 +664,8 @@
         "city": "Périgueux",
         "zipcode": "24016 CEDEX",
         "geolocation": {
-          "longitude": "79.9984162",
-          "latitude": "6.8217061"
+          "longitude": 79.9984162,
+          "latitude": 6.8217061
         },
         "communicationPreference": {
           "sms": true,
@@ -694,8 +694,8 @@
         "city": "Ushumun",
         "zipcode": "676135",
         "geolocation": {
-          "longitude": "111.4126837",
-          "latitude": "-6.8013457"
+          "longitude": 111.4126837,
+          "latitude": -6.8013457
         },
         "communicationPreference": {
           "sms": true,
@@ -724,8 +724,8 @@
         "city": "Lamawan",
         "zipcode": null,
         "geolocation": {
-          "longitude": "18.1546193",
-          "latitude": "50.5715496"
+          "longitude": 18.1546193,
+          "latitude": 50.5715496
         },
         "communicationPreference": {
           "sms": true,
