@@ -2,7 +2,6 @@ package tr.com.burakgul.mokapi.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import tr.com.burakgul.mokapi.dto.request.UserRequest;
 
@@ -12,8 +11,6 @@ import java.util.List;
 @Setter
 @Document("users")
 public class User extends BaseModel{
-    @Id
-    private String id;
     private String name;
     private String username;
     private String email;
@@ -23,7 +20,6 @@ public class User extends BaseModel{
     private Company company;
     private List<Todo> todos;
     private List<Post> posts;
-    private List<Album> albums;
 
     public void setUserRequest(UserRequest userRequest) {
         this.name = userRequest.getName();
@@ -35,6 +31,5 @@ public class User extends BaseModel{
         this.company = userRequest.getCompany();
         this.todos = userRequest.getTodos();
         this.posts = userRequest.getPosts();
-        this.albums = userRequest.getAlbums();
     }
 }

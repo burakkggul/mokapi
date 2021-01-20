@@ -1,16 +1,15 @@
 package tr.com.burakgul.mokapi.service;
 
-import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
+import tr.com.burakgul.mokapi.annotation.DataExpireDateUpdate;
 import tr.com.burakgul.mokapi.dto.request.UserRequest;
 import tr.com.burakgul.mokapi.dto.response.InfoResponse;
 import tr.com.burakgul.mokapi.dto.response.UserResponse;
@@ -22,12 +21,16 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+/**
+ * The class in which the data to be served in the "user controller" is prepared.
+ *
+ * @author Burak GUL
+ * @since 1.0.0
+ */
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
-
-    Logger logger = LoggerFactory.getLogger(UserService.class);
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -35,178 +38,207 @@ public class UserService {
 
     /**
      * It saves the users coming with user request to the database.
+     * Access key-based records can be accessed from the database.
+     * If sent null, data do not save.
      *
-     * @return @code InfoResponse
+     * @param accessKey       The access key for database access
+     * @param userRequestList User list to be saved.
+     * @return infoResponse Model to be sent for information.
      */
-    public InfoResponse saveUsers(List<UserRequest> userRequestList) {
-        try {
-            List<UserResponse> userResponseList = new ArrayList<>();
-            userRequestList.forEach(r -> {
-                User user = new User();
-                user.setUserRequest(r);
-                User savedUser = userRepository.save(user);
-                UserResponse userResponse = new UserResponse();
-                userResponse.setUser(savedUser);
-                userResponseList.add(userResponse);
-            });
-            return new InfoResponse(HttpStatus.CREATED, HttpStatus.CREATED.getReasonPhrase(), userResponseList);
-        } catch (Exception e) {
-            logger.error(e.getMessage() + ": " + e.getClass().getCanonicalName() + ": UserService saveUsers error.");
-            throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    "An error occurred. We took note to fix it as soon as possible.");
+    @Transactional
+    @DataExpireDateUpdate
+    public InfoResponse saveUsers(String accessKey, List<UserRequest> userRequestList) {
+        List<User> accessibleUsers = userRepository.findByDataKeyContains(accessKey);
+        if (accessibleUsers.size() == 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Access-Key is invalid.");
         }
+        List<User> userList = this.userRequestListConvertUserList(userRequestList, accessKey);
+        List<User> savedUsers = userRepository.saveAll(userList);
+        List<UserResponse> userResponseList = userListConvertUserResponseList(savedUsers);
+        return new InfoResponse(HttpStatus.CREATED, HttpStatus.CREATED.getReasonPhrase(), userResponseList);
     }
 
     /**
      * Brings all users registered in the database in user response.
+     * Access key-based records can be accessed from the database.
+     * If sent null, read only data will be shown.
      *
-     * @return @code List<UserResponse>
+     * @param accessKey The access key for database access
+     * @return UserResponseList User information list.
      */
-    public List<UserResponse> getUsers() {
-        try {
-            List<User> userList = userRepository.findAll();
-            List<UserResponse> userResponseList = new ArrayList<>();
-            userList.forEach(u -> {
-                UserResponse userResponse = new UserResponse();
-                userResponse.setUser(u);
-                userResponseList.add(userResponse);
-            });
-            if (userResponseList.size() == 0) {
-                throw new NoSuchElementException("Users not found. You can use the post method to add users.");
-            }
-            return userResponseList;
-        } catch (NoSuchElementException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
-        } catch (Exception e) {
-            logger.error(e.getMessage() + ": " + e.getClass().getCanonicalName() + ": UserService getUsers error.");
-            throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    "An error occurred. We took note to fix it as soon as possible.");
+    @DataExpireDateUpdate
+    public List<UserResponse> getUsers(String accessKey) {
+        List<User> userList;
+        if(accessKey == null){
+            userList = userRepository.findByIsReadOnly(true);
+        }else{
+            userList = userRepository.findByDataKeyContains(accessKey);
         }
+        if (userList.size() == 0) {
+            throw new NoSuchElementException("Users not found. You can use the post method to add users.");
+        }
+        return this.userListConvertUserResponseList(userList);
     }
 
     /**
      * Returns the user response object with the id coming as a parameter in the user object.
+     * Access key-based records can be accessed from the database.
+     * If sent null, read only data will be shown.
      *
-     * @param id @code String
-     * @return @code UserResponse
+     * @param accessKey The access key for database access
+     * @param id        a specific user identifier
+     * @return UserResponse User information response.
      */
-    public UserResponse getUserById(String id) {
-        try {
-            UserResponse userResponse = new UserResponse();
-            Optional<User> user = userRepository.findById(id);
-            if(user.isPresent()){
-                 userResponse.setUser(user.get());
-            }else{
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found");
-            }
-
-            return userResponse;
-        } catch (Exception e) {
-            logger.error(e.getMessage() + ": " + e.getClass().getCanonicalName() + ": UserService getUserById error.");
-            throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    "An error occurred. We took note to fix it as soon as possible.");
+    @DataExpireDateUpdate
+    public UserResponse getUserById(String accessKey, String id) {
+        Optional<User> userOptional;
+        if (accessKey == null) {
+            userOptional = userRepository.findByIdAndIsReadOnly(id, true);
+        } else {
+            userOptional = userRepository.findByIdAndDataKeyContains(id, accessKey);
         }
+        UserResponse userResponse = new UserResponse();
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            userResponse.setUser(user);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found. You can use the post method to add users.");
+        }
+        return userResponse;
     }
 
     /**
      * Updates the user according to the data received by id and user request and returns in user response.
+     * Access key-based records can be accessed from the database.
+     * If sent null, data do not change.
      *
-     * @param id @code String
-     * @param userRequest @code UserRequest
-     * @return @code InfoResponse<UserResponse>
+     * @param accessKey   The access key for database access
+     * @param id          a specific user identifier
+     * @param userRequest The model containing the new information of the user to be updated
+     * @return InfoResponse Model to be sent for information.
      */
-    public InfoResponse updateUserById(String id, UserRequest userRequest) {
-        try {
-            Optional<User> userOptional = userRepository.findById(id);
-            User user;
-            if(userOptional.isPresent()){
-                user = userOptional.get();
-            }else{
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found");
-            }
-            user.setUserRequest(userRequest);
-            User savedUser = userRepository.save(user);
-            UserResponse userResponse = new UserResponse();
-            userResponse.setUser(savedUser);
-            return new InfoResponse(HttpStatus.OK, "Updated successfully.", userResponse);
-        } catch (Exception e) {
-            logger.error(e.getMessage() + ": " + e.getClass().getCanonicalName() + ": UserService updateUserById error.");
-            throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    "An error occurred. We took note to fix it as soon as possible.");
+    @Transactional
+    @DataExpireDateUpdate
+    public InfoResponse updateUserById(String accessKey, String id, UserRequest userRequest) {
+        Optional<User> userOptional = userRepository.findByIdAndDataKeyContains(id, accessKey);
+        User user;
+        if (userOptional.isPresent()) {
+            user = userOptional.get();
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found.");
         }
+        user.setUserRequest(userRequest);
+        User savedUser = userRepository.save(user);
+        UserResponse userResponse = new UserResponse();
+        userResponse.setUser(savedUser);
+        return new InfoResponse(HttpStatus.OK, "Updated successfully.", userResponse);
     }
 
     /**
      * Deletes user with incoming user id.
+     * Access key-based records can be accessed from the database.
+     * If sent null, read only data will be shown.
      *
-     * @param id @code String
-     * @return @code InfoResponse
+     * @param accessKey The access key for database access
+     * @param id        String The access key for database access
+     * @return InfoResponse Model to be sent for information.
      */
-    public InfoResponse deleteUserById(String id) {
-        try {
-            userRepository.deleteById(id);
-            return new InfoResponse(HttpStatus.OK, "User " + id + " has been successfully deleted.");
-        } catch (Exception e) {
-            logger.error(e.getMessage() + ": " + e.getClass().getCanonicalName() + ": UserService deleteUserById error.");
-            throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    "An error occurred. We took note to fix it as soon as possible.");
-        }
+    @Transactional
+    @DataExpireDateUpdate
+    public InfoResponse deleteUserById(String accessKey, String id) {
+        userRepository.deleteByIdAndDataKeyContains(id, accessKey);
+        return new InfoResponse(HttpStatus.OK, "User " + id + " has been successfully deleted.");
     }
 
     /**
      * Delete all users.
+     * Access key-based records can be accessed from the database.
+     * If sent null, read only data will be shown.
      *
-     * @return @code InfoResponse
+     * @params accessKey The access key for database access
+     * @return InfoResponse Model to be sent for information.
      */
-    public InfoResponse deleteAllUsers() {
-        try {
-            userRepository.deleteAll();
-            return new InfoResponse(HttpStatus.OK, "All users has been successfully deleted.");
-        } catch (Exception e) {
-            logger.error(e.getMessage() + ": " + e.getClass().getCanonicalName() + ": UserService deleteAllUsers error.");
-            throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    "An error occurred. We took note to fix it as soon as possible.");
-        }
+    @Transactional
+    @DataExpireDateUpdate
+    public InfoResponse deleteAllUsers(String accessKey) {
+        userRepository.deleteAllByDataKeyContains(accessKey);
+        return new InfoResponse(HttpStatus.OK, "All users has been successfully deleted.");
     }
 
     /**
-     * Updates user according to incoming id and json patch request
+     * Updates user according to incoming id and json patch request.
+     * Access key-based records can be accessed from the database.
+     * If sent null, read only data will be shown.
      *
-     * @param id @code String
-     * @param jsonPatch @code JsonPatch
-     * @return @code InfoResponse<UserResponse>
+     * @param accessKey the access key for database access
+     * @param id        String The access key for database access
+     * @param jsonPatch A JSONPatch document as defined by RFC 6902
+     * @return infoResponse Model to be sent for information.
      */
-    public InfoResponse patchUserById(String id, JsonPatch jsonPatch) {
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            Optional<User> userOption = userRepository.findById(id);
-            User user;
-            if (userOption.isPresent()){
-                user = userOption.get();
-            }else{
-                throw new NoSuchElementException("User not found. You can use the post method to add users.");
-            }
-            JsonNode patched = jsonPatch.apply(objectMapper.convertValue(user, JsonNode.class));
-            user = objectMapper.treeToValue(patched, User.class);
-            User patchedUser = userRepository.save(user);
-            UserResponse patchedUserResponse = new UserResponse();
-            patchedUserResponse.setUser(patchedUser);
-            return new InfoResponse(HttpStatus.OK, "Patching was successful.", patchedUserResponse);
-        }catch (JsonPatchException | JsonParseException | UnrecognizedPropertyException e){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }catch (NoSuchElementException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
-        } catch (Exception e) {
-            logger.error(e.getMessage() + ": " + e.getClass().getCanonicalName() + ": UserService patchUserById error.");
-            throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    "An error occurred. We took note to fix it as soon as possible.");
+    @Transactional
+    @DataExpireDateUpdate
+    public InfoResponse patchUserById(String accessKey, String id, JsonPatch jsonPatch) throws JsonPatchException, JsonProcessingException {
+        Optional<User> userOption = userRepository.findByIdAndDataKeyContains(id, accessKey);
+        User user;
+        if (userOption.isPresent()) {
+            user = userOption.get();
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found. You can use the post method to add users.");
         }
+        user = this.jsonPatchToUser(jsonPatch, user);
+        User patchedUser = userRepository.save(user);
+        UserResponse patchedUserResponse = new UserResponse();
+        patchedUserResponse.setUser(patchedUser);
+        return new InfoResponse(HttpStatus.OK, "Patching was successful.", patchedUserResponse);
+    }
+
+    /**
+     * It takes the convertable user list and converts it to a user information list.
+     *
+     * @param users user list to convertable.
+     * @return userResponseList Converted user response list.
+     */
+    private List<UserResponse> userListConvertUserResponseList(List<User> users) {
+        List<UserResponse> userResponses = new ArrayList<>();
+        users.forEach(user -> {
+            UserResponse userResponse = new UserResponse();
+            userResponse.setUser(user);
+            userResponses.add(userResponse);
+        });
+        return userResponses;
+    }
+
+    /**
+     *
+     * @param userRequestList user request list to convertable.
+     * @param accessKey access key to be added to user.
+     * @return userList Converted user list.
+     */
+    private List<User> userRequestListConvertUserList(List<UserRequest> userRequestList, String accessKey) {
+        List<User> convertedUserList = new ArrayList<>();
+        userRequestList.forEach(r -> {
+            User user = new User();
+            user.setUserRequest(r);
+            user.setIsReadOnly(false);
+            user.setDataKey(accessKey);
+            convertedUserList.add(user);
+        });
+        return convertedUserList;
+    }
+
+    /**
+     * Patching user with json patch.
+     *
+     * @param jsonPatch A JSONPatch document as defined by RFC 6902
+     * @param user user to patch.
+     * @return User Patched user.
+     * @throws JsonPatchException
+     * @throws JsonProcessingException
+     */
+    private User jsonPatchToUser(JsonPatch jsonPatch, User user) throws JsonPatchException, JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode patched = jsonPatch.apply(objectMapper.convertValue(user, JsonNode.class));
+        user = objectMapper.treeToValue(patched, User.class);
+        return user;
     }
 }

@@ -3,7 +3,6 @@ package tr.com.burakgul.mokapi.dto.request;
 import lombok.Getter;
 import lombok.Setter;
 import tr.com.burakgul.mokapi.model.Address;
-import tr.com.burakgul.mokapi.model.Album;
 import tr.com.burakgul.mokapi.model.Company;
 import tr.com.burakgul.mokapi.model.Post;
 import tr.com.burakgul.mokapi.model.Todo;
@@ -22,5 +21,4 @@ public class UserRequest {
     private Company company;
     private List<Todo> todos;
     private List<Post> posts;
-    private List<Album> albums;
 }
