@@ -1,0 +1,744 @@
+[
+  {
+    "id": null,
+    "name": "Burak GUL",
+    "username": "burakgul",
+    "email": "burakkggul@gmail.com",
+    "addresses": [
+      {
+        "addressName": "Home",
+        "addressLine": "Altay Eryaman",
+        "country": "Turkey",
+        "city": "Ankara",
+        "zipcode": "06690",
+        "geolocation": {
+          "longitude": 32.634198,
+          "latitude": 39.967806
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": true
+        },
+        "active": true
+      },
+      {
+        "addressName": "Work",
+        "addressLine": "546 Ramsey Hill",
+        "country": "Philippines",
+        "city": "Pulo",
+        "zipcode": "1706",
+        "geolocation": {
+          "longitude": -47.058302,
+          "latitude": -1.7437356
+        },
+        "communicationPreference": {
+          "sms": false,
+          "email": true
+        },
+        "active": true
+      }
+    ],
+    "phone": "+90 543 443 04 68",
+    "website": "https://www.burakgul.com.tr",
+    "company": {
+      "name": "Özgür Yazılım A.Ş.",
+      "catchPhrase": "Şeffaf Teknoloji, Özel Çözümler"
+    }
+  },
+  {
+    "id": null,
+    "name": "Fidelia Nisco",
+    "username": "fnisco0",
+    "email": "fnisco0@dot.gov",
+    "addresses": [
+      {
+        "addressName": "Home",
+        "addressLine": "1 Spaight Pass",
+        "country": "Poland",
+        "city": "Olszówka",
+        "zipcode": "62-641",
+        "geolocation": {
+          "longitude": 12.6257516,
+          "latitude": 50.1922582
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": false
+        },
+        "active": true
+      },
+      {
+        "addressName": "Work",
+        "addressLine": "2720 Sachs Center",
+        "country": "South Africa",
+        "city": "Krugersdorp",
+        "zipcode": "1933",
+        "geolocation": {
+          "longitude": 43.200317,
+          "latitude": 57.7856103
+        },
+        "communicationPreference": {
+          "sms": false,
+          "email": true
+        },
+        "active": true
+      },
+      {
+        "addressName": "School",
+        "addressLine": "27852 Ludington Center",
+        "country": "Cameroon",
+        "city": "Bertoua",
+        "zipcode": null,
+        "geolocation": {
+          "longitude": 114.847075,
+          "latitude": 38.021567
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": true
+        },
+        "active": true
+      },
+      {
+        "addressName": "Dad's Home",
+        "addressLine": "877 Fairfield Crossing",
+        "country": "China",
+        "city": "Yongchuan",
+        "zipcode": null,
+        "geolocation": {
+          "longitude": 114.908822,
+          "latitude": 38.174362
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": true
+        },
+        "active": false
+      }
+    ],
+    "phone": "+389 601 909 3707",
+    "website": "https://nyu.edu",
+    "company": {
+      "name": "Lowe-Berge",
+      "catchPhrase": "Right-sized fault-tolerant solution"
+    }
+  },
+  {
+    "id": null,
+    "name": "Maurise Gallichiccio",
+    "username": "mgallichiccio1",
+    "email": "mgallichiccio1@feedburner.com",
+    "addresses": [
+      {
+        "addressName": "Home",
+        "addressLine": "3827 Sage Terrace",
+        "country": "Poland",
+        "city": "Klimontów",
+        "zipcode": "32-112",
+        "geolocation": {
+          "longitude": 29.6904746,
+          "latitude": -1.2834307
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": false
+        },
+        "active": true
+      },
+      {
+        "addressName": "Work",
+        "addressLine": "99 Canary Plaza",
+        "country": "Peru",
+        "city": "Huaranchal",
+        "zipcode": null,
+        "geolocation": {
+          "longitude": 13.6275894,
+          "latitude": 10.8909284
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": true
+        },
+        "active": false
+      }
+    ],
+    "phone": "+212 965 744 7627",
+    "website": "https://pbs.org",
+    "company": {
+      "name": "Abshire LLC",
+      "catchPhrase": "Re-engineered system-worthy capability"
+    }
+  },
+  {
+    "id": null,
+    "name": "Simonette Syme",
+    "username": "ssyme2",
+    "email": "ssyme2@washingtonpost.com",
+    "addresses": [
+      {
+        "addressName": "Home",
+        "addressLine": "6 Hovde Junction",
+        "country": "South Africa",
+        "city": "Hluhluwe",
+        "zipcode": "3960",
+        "geolocation": {
+          "longitude": -52.2516426,
+          "latitude": -15.8958471
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": true
+        },
+        "active": true
+      }
+    ],
+    "phone": "+55 460 538 4819",
+    "website": "http://ycombinator.com",
+    "company": {
+      "name": "Koch Inc",
+      "catchPhrase": "Function-based context-sensitive Graphic Interface"
+    }
+  },
+  {
+    "id": null,
+    "name": "Nancey Bruhn",
+    "username": "nbruhn3",
+    "email": "nbruhn3@goodreads.com",
+    "addresses": [
+      {
+        "addressName": "Home",
+        "addressLine": "35 Nova Trail",
+        "country": "China",
+        "city": "Licun",
+        "zipcode": null,
+        "geolocation": {
+          "longitude": -77.069999,
+          "latitude": -12.0904353
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": true
+        },
+        "active": true
+      }
+    ],
+    "phone": "+51 335 488 4494",
+    "website": "http://washington.edu",
+    "company": {
+      "name": "Gusikowski, Nikolaus and Erdman",
+      "catchPhrase": "Reduced secondary parallelism"
+    }
+  },
+  {
+    "id": null,
+    "name": "Casie Hopfer",
+    "username": "chopfer4",
+    "email": "chopfer4@blinklist.com",
+    "addresses": [
+      {
+        "addressName": "Home",
+        "addressLine": "6 Golf Course Street",
+        "country": "Indonesia",
+        "city": "Gurung",
+        "zipcode": null,
+        "geolocation": {
+          "longitude": 113.4956,
+          "latitude": -8.3653
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": true
+        },
+        "active": true
+      }
+    ],
+    "phone": "+7 186 333 5276",
+    "website": "https://earthlink.net",
+    "company": {
+      "name": "McGlynn, Graham and Dickinson",
+      "catchPhrase": "Distributed intermediate database"
+    }
+  },
+  {
+    "id": null,
+    "name": "James Hammatt",
+    "username": "jhammatt5",
+    "email": "jhammatt5@skyrock.com",
+    "addresses": [
+      {
+        "addressName": "Home",
+        "addressLine": "313 Algoma Plaza",
+        "country": "Indonesia",
+        "city": "Banjar Kertasari",
+        "zipcode": null,
+        "geolocation": {
+          "longitude": 15.2242807,
+          "latitude": 49.5318094
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": true
+        },
+        "active": true
+      }
+    ],
+    "phone": "+63 918 225 2243",
+    "website": "http://tripod.com",
+    "company": {
+      "name": "Nienow, Barton and Keebler",
+      "catchPhrase": "Persevering eco-centric superstructure"
+    }
+  },
+  {
+    "id": null,
+    "name": "Connie Iwanicki",
+    "username": "ciwanicki6",
+    "email": "ciwanicki6@yolasite.com",
+    "addresses": [
+      {
+        "addressName": "Home",
+        "addressLine": "03979 Glendale Terrace",
+        "country": "Thailand",
+        "city": "Na Yung",
+        "zipcode": "41380",
+        "geolocation": {
+          "longitude": 115.814504,
+          "latitude": 32.890479
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": true
+        },
+        "active": true
+      }
+    ],
+    "phone": "+49 837 272 2764",
+    "website": "http://gmpg.org",
+    "company": {
+      "name": "Kiehn-Wisoky",
+      "catchPhrase": "Reduced national budgetary management"
+    }
+  },
+  {
+    "id": null,
+    "name": "Sancho Hamil",
+    "username": "shamil7",
+    "email": "shamil7@google.de",
+    "addresses": [
+      {
+        "addressName": "Home",
+        "addressLine": "7 Mariners Cove Alley",
+        "country": "Finland",
+        "city": "Petäjävesi",
+        "zipcode": "41901",
+        "geolocation": {
+          "longitude": -74.6180833,
+          "latitude": -15.4384565
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": true
+        },
+        "active": true
+      }
+    ],
+    "phone": "+52 615 506 5216",
+    "website": "http://artisteer.com",
+    "company": {
+      "name": "Moore-Murphy",
+      "catchPhrase": "Mandatory static info-mediaries"
+    }
+  },
+  {
+    "id": null,
+    "name": "Finley Covert",
+    "username": "fcovert8",
+    "email": "fcovert8@abc.net.au",
+    "addresses": [
+      {
+        "addressName": "Home",
+        "addressLine": "11 Melrose Place",
+        "country": "China",
+        "city": "Xiuyu",
+        "zipcode": null,
+        "geolocation": {
+          "longitude": -74.6180833,
+          "latitude": -15.4384565
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": true
+        },
+        "active": true
+      }
+    ],
+    "phone": "+62 116 577 9831",
+    "website": "https://stumbleupon.com",
+    "company": {
+      "name": "West-Kling",
+      "catchPhrase": "Managed hybrid toolset"
+    }
+  },
+  {
+    "id": null,
+    "name": "Rich Inkpen",
+    "username": "rinkpen9",
+    "email": "rinkpen9@skype.com",
+    "addresses": [
+      {
+        "addressName": "Home",
+        "addressLine": "1395 Harbort Alley",
+        "country": "Brazil",
+        "city": "Anápolis",
+        "zipcode": "75000-000",
+        "geolocation": {
+          "longitude": 35.6160558,
+          "latitude": 30.8337059
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": true
+        },
+        "active": true
+      }
+    ],
+    "phone": "+1 262 740 8042",
+    "website": "https://goo.ne.jp",
+    "company": {
+      "name": "West-Kling",
+      "catchPhrase": "Managed hybrid toolset"
+    }
+  },
+  {
+    "id": null,
+    "name": "Amery Cornock",
+    "username": "acornocka",
+    "email": "acornocka@altervista.org",
+    "addresses": [
+      {
+        "addressName": "Home",
+        "addressLine": "5 Kensington Road",
+        "country": "Brazil",
+        "city": "Salgueiro",
+        "zipcode": "56000-000",
+        "geolocation": {
+          "longitude": 168.0177331,
+          "latitude": -46.3478987
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": true
+        },
+        "active": true
+      }
+    ],
+    "phone": "+86 462 395 7333",
+    "website": "https://dailymail.co.uk",
+    "company": {
+      "name": "Marvin-Zemlak",
+      "catchPhrase": "Expanded methodical throughput"
+    }
+  },
+  {
+    "id": null,
+    "name": "Buffy Boden",
+    "username": "bbodenb",
+    "email": "bbodenb@smh.com.au",
+    "addresses": [
+      {
+        "addressName": "Home",
+        "addressLine": "40255 Commercial Point",
+        "country": "Austria",
+        "city": "Villach",
+        "zipcode": "9580",
+        "geolocation": {
+          "longitude": -6.1157412,
+          "latitude": 53.2774963
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": true
+        },
+        "active": true
+      }
+    ],
+    "phone": "+62 227 736 5862",
+    "website": "http://cocolog-nifty.com",
+    "company": {
+      "name": "Bednar, Bradtke and Feil",
+      "catchPhrase": "Compatible bottom-line model"
+    }
+  },
+  {
+    "id": null,
+    "name": "Kermit Kasting",
+    "username": "kkastingc",
+    "email": "kkastingc@stanford.edu",
+    "addresses": [
+      {
+        "addressName": "Home",
+        "addressLine": "647 Forest Avenue",
+        "country": "China",
+        "city": "Xinlin",
+        "zipcode": null,
+        "geolocation": {
+          "longitude": 112.4962138,
+          "latitude": 34.6914551
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": false
+        },
+        "active": true
+      }
+    ],
+    "phone": "+93 806 242 3049",
+    "website": "https://twitpic.com",
+    "company": {
+      "name": "Predovic LLC",
+      "catchPhrase": "Up-sized global parallelism"
+    }
+  },
+  {
+    "id": null,
+    "name": "Kendra Bleasdale",
+    "username": "kbleasdaled",
+    "email": "kbleasdaled@last.fm",
+    "addresses": [
+      {
+        "addressName": "Home",
+        "addressLine": "60 Towne Plaza",
+        "country": "Indonesia",
+        "city": "Waiwukak",
+        "zipcode": null,
+        "geolocation": {
+          "longitude": 108.8076195,
+          "latitude": 23.7247599
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": true
+        },
+        "active": true
+      }
+    ],
+    "phone": "+7 794 860 1286",
+    "website": "https://unc.edu",
+    "company": {
+      "name": "Abshire LLC",
+      "catchPhrase": "Assimilated web-enabled pricing structure"
+    }
+  },
+  {
+    "id": null,
+    "name": "Orion Jasper",
+    "username": "ojaspere",
+    "email": "ojaspere@redcross.org",
+    "addresses": [
+      {
+        "addressName": "Home",
+        "addressLine": "8244 4th Crossing",
+        "country": "Cameroon",
+        "city": "Penja",
+        "zipcode": null,
+        "geolocation": {
+          "longitude": 44.0788197,
+          "latitude": 40.0678351
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": true
+        },
+        "active": true
+      }
+    ],
+    "phone": "+55 504 934 2303",
+    "website": "http://addthis.com",
+    "company": {
+      "name": "Hessel, Russel and Braun",
+      "catchPhrase": "Re-engineered tangible moratorium"
+    }
+  },
+  {
+    "id": null,
+    "name": "Hasret Salto",
+    "username": "ssalto",
+    "email": "ssalto@redcross.org",
+    "addresses": [
+      {
+        "addressName": "Home",
+        "addressLine": "53 Norway Maple Point",
+        "country": "Ivory Coast",
+        "city": "Bondoukou",
+        "zipcode": null,
+        "geolocation": {
+          "longitude": 108.329633,
+          "latitude": 34.062917
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": true
+        },
+        "active": true
+      },
+      {
+        "addressName": "Work",
+        "addressLine": "2804 Ridgeway Terrace",
+        "country": "Iran",
+        "city": "Tonekābon",
+        "zipcode": null,
+        "geolocation": {
+          "longitude": -64.8318347,
+          "latitude": 9.4546148
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": true
+        },
+        "active": true
+      },
+      {
+        "addressName": "School",
+        "addressLine": "787 Graceland Road",
+        "country": "Ukraine",
+        "city": "Dniprodzerzhyns’k",
+        "zipcode": null,
+        "geolocation": {
+          "longitude": 118.796877,
+          "latitude": 32.060255
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": true
+        },
+        "active": false
+      }
+    ],
+    "phone": "+976 697 174 2683",
+    "website": "https://wikipedia.org",
+    "company": {
+      "name": "Hermann, Johnson and Ruecker",
+      "catchPhrase": "Object-based user-facing structure"
+    }
+  },
+  {
+    "id": null,
+    "name": "Vannie Halling",
+    "username": "vhallingg",
+    "email": "vhallingg@liveinternet.ru",
+    "addresses": [
+      {
+        "addressName": "Home",
+        "addressLine": "18 Springs Center",
+        "country": "Philippines",
+        "city": "Patpata Segundo",
+        "zipcode": "3604",
+        "geolocation": {
+          "longitude": 119.700816,
+          "latitude": 29.0994968
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": true
+        },
+        "active": true
+      }
+    ],
+    "phone": "+351 642 563 2171",
+    "website": "https://toplist.cz",
+    "company": {
+      "name": "Ernser, Mante and Orn",
+      "catchPhrase": "Streamlined exuding extranet"
+    }
+  },
+  {
+    "id": null,
+    "name": "Daniela Luxford",
+    "username": "dluxfordh",
+    "email": "dluxfordh@chicagotribune.com",
+    "addresses": [
+      {
+        "addressName": "Home",
+        "addressLine": "36516 Melby Hill",
+        "country": "France",
+        "city": "Périgueux",
+        "zipcode": "24016 CEDEX",
+        "geolocation": {
+          "longitude": 79.9984162,
+          "latitude": 6.8217061
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": true
+        },
+        "active": true
+      }
+    ],
+    "phone": "+963 722 748 1054",
+    "website": "https://delicious.com",
+    "company": {
+      "name": "Lindgren Inc",
+      "catchPhrase": "Synchronised clear-thinking protocol"
+    }
+  },
+  {
+    "id": null,
+    "name": "Tillie Latta",
+    "username": "tlattai",
+    "email": "tlattai@msn.com",
+    "addresses": [
+      {
+        "addressName": "Home",
+        "addressLine": "8588 Declaration Pass",
+        "country": "Russia",
+        "city": "Ushumun",
+        "zipcode": "676135",
+        "geolocation": {
+          "longitude": 111.4126837,
+          "latitude": -6.8013457
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": true
+        },
+        "active": true
+      }
+    ],
+    "phone": "+98 176 948 8612",
+    "website": "http://nsw.gov.au",
+    "company": {
+      "name": "Balistreri Inc",
+      "catchPhrase": "Advanced uniform monitoring"
+    }
+  },
+  {
+    "id": null,
+    "name": "Dorie Armytage",
+    "username": "darmytagel",
+    "email": "darmytagel@elegantthemes.com",
+    "addresses": [
+      {
+        "addressName": "Home",
+        "addressLine": "102 Donald Junction",
+        "country": "China",
+        "city": "Lamawan",
+        "zipcode": null,
+        "geolocation": {
+          "longitude": 18.1546193,
+          "latitude": 50.5715496
+        },
+        "communicationPreference": {
+          "sms": true,
+          "email": true
+        },
+        "active": true
+      }
+    ],
+    "phone": "+48 464 290 4420",
+    "website": "http://tuttocitta.it",
+    "company": {
+      "name": "Wisoky, Windler and Emard",
+      "catchPhrase": "Re-contextualized optimal process improvement"
+    }
+  }
+]

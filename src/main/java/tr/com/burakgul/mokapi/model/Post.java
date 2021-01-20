@@ -1,19 +1,20 @@
 package tr.com.burakgul.mokapi.model;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.bson.types.ObjectId;
+
+import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@Document
 public class Post {
-    @Id
     private String id;
-    private String userId;
     private String title;
     private String body;
+    private List<Comment> comments;
+
+    public Post() {
+        this.id = new ObjectId().toString();
+    }
 }

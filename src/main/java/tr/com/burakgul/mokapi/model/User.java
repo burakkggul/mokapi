@@ -2,39 +2,34 @@ package tr.com.burakgul.mokapi.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import tr.com.burakgul.mokapi.dto.request.UserRequest;
 
+import java.util.List;
+
 @Getter
 @Setter
-@Document
-public class User {
-    @Id
-    private String id;
+@Document("users")
+public class User extends BaseModel{
     private String name;
     private String username;
     private String email;
-    private Address address;
+    private List<Address> addresses;
     private String phone;
     private String website;
     private Company company;
+    private List<Todo> todos;
+    private List<Post> posts;
 
     public void setUserRequest(UserRequest userRequest) {
         this.name = userRequest.getName();
         this.username = userRequest.getUsername();
         this.email = userRequest.getEmail();
-        if (userRequest.getAddress() != null) {
-            this.address = new Address(userRequest.getAddress());
-        } else {
-            this.address = null;
-        }
+        this.addresses = userRequest.getAddresses();
         this.phone = userRequest.getPhone();
         this.website = userRequest.getWebsite();
-        if (userRequest.getCompany() != null) {
-            this.company = new Company(userRequest.getCompany());
-        } else {
-            this.company = null;
-        }
+        this.company = userRequest.getCompany();
+        this.todos = userRequest.getTodos();
+        this.posts = userRequest.getPosts();
     }
 }
