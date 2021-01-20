@@ -9,11 +9,10 @@ Read this in other languages: https://github.com/burakkggul/mokapi/blob/master/R
 
 1. JDK 11
 2. Mongo DB 4.4.2
-Soon...
 
 ## Usage
 
-You can get a sample of requests that can be sent to all end points that can be used in the application from the tests available in `/jmeter/func_test.jmx`.
+You can get a sample of requests that can be sent to all end points that can be used in the application from the tests available in `/jmeter/load_test.jmx`.
 For more information about Jmeter, click https://jmeter.apache.org[here].
 
 ### HTTP GET
