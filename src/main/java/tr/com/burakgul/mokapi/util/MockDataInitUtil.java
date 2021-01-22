@@ -4,9 +4,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import tr.com.burakgul.mokapi.model.User;
@@ -21,8 +21,7 @@ public class MockDataInitUtil {
 
     private final UserRepository userRepository;
 
-    @Value("classpath:mockdata/user.json")
-    Resource userJsonResource;
+    Resource userResource = new ClassPathResource("mockdata/user.json");
 
     public MockDataInitUtil(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -53,7 +52,7 @@ public class MockDataInitUtil {
 
     public List<User> readUsersByResource() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode jsonNode = mapper.readValue(userJsonResource.getFile(), JsonNode.class);
+        JsonNode jsonNode = mapper.readValue(userResource.getInputStream(), JsonNode.class);
         ObjectReader reader = mapper.readerFor(new TypeReference<List<User>>() {});
         return reader.readValue(jsonNode);
     }

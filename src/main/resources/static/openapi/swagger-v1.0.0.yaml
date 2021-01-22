@@ -8,7 +8,7 @@ info:
   license:
     name: "GNUv3"
     url: "https://github.com/burakkggul/mokapi/blob/master/LICENSE"
-host: "localhost:8080"
+host: "mokapi.burakgul.com.tr"
 basePath: "/"
 tags:
   - name: "Access Header"
@@ -23,7 +23,6 @@ tags:
     description: "Endpoint to use get, post, put, patch, and delete methods on user comments"
 schemes:
   - "https"
-  - "http"
 paths:
 
   /users:
