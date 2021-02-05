@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class m SwaggerRedirectController {
+public class SwaggerRedirectController {
 
     @RequestMapping("/")
     public String redirectSwagger() {
